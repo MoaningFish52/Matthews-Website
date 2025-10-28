@@ -1,5 +1,5 @@
 const profilePic = document.querySelector('.profile-pic-container');
-const spookySound = document.getElementById('spooky-sound');
+const meowSound = document.getElementById('meow-sound');
 
 function preloadImage(src) {
   const img = new Image();
@@ -12,12 +12,12 @@ function preloadImage(src) {
   };
 }
 
-function playSpookySound() {
-  if (!spookySound) return;
-  spookySound.volume = 0.3;
-  spookySound.pause();
-  spookySound.currentTime = 0;
-  spookySound.play().catch(err => {
+function playMeowSound() {
+  if (!meowSound) return;
+  meowSound.volume = 0.3;
+  meowSound.pause();
+  meowSound.currentTime = 0;
+  meowSound.play().catch(err => {
     console.error('Failed to play sound:', err);
   });
 }
@@ -30,10 +30,10 @@ function initProfilePicEvents() {
     profilePic.addEventListener(evt, e => {
       if (evt === 'touchstart') e.preventDefault();
       if (evt === 'keydown' && e.key !== 'Enter') return;
-      playSpookySound();
+      playMeowSound();
     });
   });
 }
 
-preloadImage('assets/images/pumpkin.webp');
+preloadImage('assets/images/cat.webp');
 initProfilePicEvents();
