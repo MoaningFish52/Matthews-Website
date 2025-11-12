@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --background: #0d0d0d;
+    --card-bg: #1a1a1a;
+    --blue-glow: rgba(59, 130, 246, 0.5); 
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: #e5e7eb;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box; 
+}
+
+.parallax-bg {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    background-image: radial-gradient(#222 1px, transparent 0); 
+    background-size: 30px 30px;
+    background-attachment: fixed; 
+    z-index: -1; 
+}
+
+.text-gradient {
+    background-image: linear-gradient(90deg, #3b82f6, #4f46e5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+.card-bg {
+    background-color: var(--card-bg);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4); 
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; 
+}
+.glass-header {
+    backdrop-filter: blur(8px);
+    background-color: rgba(13, 13, 13, 0.7); 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06), 0 0 15px rgba(59, 130, 246, 0.15);
+}
+.hover-scale-fix {
+    will-change: transform;
+    transform: translateZ(0);
+}
+.cta-shadow {
+    box-shadow: 0 0 20px var(--blue-glow);
+}
+
+.separator {
+    width: 25%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #3b82f6 20%, #4f46e5 80%, transparent 100%);
+    margin: 4rem auto;
+    border-radius: 9999px;
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.footer-gradient {
+    background-color: var(--background);
+}
+
+.nav-link, .nav-link-footer {
+    color: #d1d5db; 
+    padding: 4px 12px;
+    border-radius: 8px; 
+    transition: all 0.2s ease-in-out; 
+    text-decoration: none;
+}
+.nav-link:hover, .nav-link-footer:hover {
+    color: #ffffff; 
+    background-color: #1f2937; 
+}
+.mobile-nav-link {
+    display: block;
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    font-size: 1rem; 
+    font-weight: 500; 
+    color: #d1d5db; 
+    transition: all 0.2s ease-in-out; 
+    text-decoration: none;
+}
+.mobile-nav-link:hover {
+    background-color: #1f2937; 
+    color: #ffffff;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+.loader {
+    border: 6px solid #1a1a1a;
+    border-top: 6px solid #3b82f6; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+.hero-animate {
+    animation: subtle-float 8s ease-in-out infinite;
+}
+
+#scroll-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 999;
+}
+#scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.animated-border-card {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: 1rem;
+    padding: 1px; 
+    overflow: hidden;
+    transform: translate3d(0,0,0); 
+    transition: all 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.4); 
+}
+.animated-border-card:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 
+                0 5px 10px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(59, 130, 246, 0.6); 
+    transform: translateY(-5px);
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2rem; 
+}

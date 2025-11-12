@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MattFJ7</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+
+    <div class="parallax-bg"></div>
+
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <header class="sticky top-0 z-50 glass-header border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 relative">
+                <a href="#" class="flex-shrink-0 flex items-center text-2xl font-extrabold z-10">
+                    Matthew
+                </a>
+
+                <nav class="hidden md:flex space-x-2 absolute left-1/2 transform -translate-x-1/2">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Skills</a>
+                    <a href="#community" class="nav-link">Contact</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4 z-10">
+                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center space-x-2 text-gray-300 hover:text-white transition duration-200">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="mailto:moaningtortoise@gmail.com" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-lg shadow-blue-500/50">
+                        <i data-lucide="mail" class="w-5 h-5 inline-block mr-1"></i>
+                        Contact Me
+                    </a>
+                </div>
+
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition duration-200">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-[#131313] border-t border-gray-800 py-2 transition-all duration-300 ease-in-out">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="mobile-nav-link">Home</a>
+                <a href="#features" class="mobile-nav-link">Skills</a>
+                <a href="#community" class="mobile-nav-link">Contact</a>
+                <div class="pt-4 space-y-2">
+                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center justify-center w-full space-x-2 text-gray-300 hover:text-white py-2 rounded-md border border-gray-700 hover:bg-gray-800 transition duration-200">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="mailto:moaningtortoise@gmail.com" class="flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200">
+                        <i data-lucide="mail" class="w-5 h-5 inline-block mr-1"></i>
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero-section" class="py-24 sm:py-32 lg:py-40 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="hero-animate relative z-10"> 
+                <span class="text-sm font-semibold uppercase tracking-wider text-blue-400 mb-4 inline-block">
+                    Developer, Builder, and Creative
+                </span>
+                <h1 class="text-6xl sm:text-7xl lg:text-8xl font-extrabold leading-tight mb-6">
+                    Welcome to my <span class="text-gradient">Website</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-4xl mx-auto mb-10">
+                    I'm Matthew, a <span class="font-bold">17-year-old from Canada</span> with an interest in <span class="font-bold">operating systems and gaming</span>.
+                </p>
+            </div>
+            <div class="flex justify-center space-x-4 relative z-10">
+                <a href="#features" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition duration-300 transform hover:scale-105 shadow-xl cta-shadow flex items-center space-x-2 hover-scale-fix">
+                    <i data-lucide="folder-kanban" class="w-6 h-6"></i>
+                    <span>View Skills</span>
+                </a>
+            </div>
+        </section>
+
+        <div class="separator"></div>
+
+        <section id="features" class="py-20 sm:py-24 bg-[#111111] border-t border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">
+                        My Core <span class="text-gradient">Expertise</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        My core technical capabilities, blending modern frontend development with specialized knowledge in operating systems and PC hardware.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="layout-grid" class="w-10 h-10 text-blue-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">Frontend Development</h3>
+                            <p class="text-gray-400">
+                                Building responsive user interfaces with <span class="font-bold">React, Next.js</span>, and modern CSS frameworks like <span class="font-bold">Tailwind CSS</span>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="settings" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">Operating Systems</h3>
+                            <p class="text-gray-400">
+                                Expertise in system configuration and management for both <span class="font-bold">Linux</span> and <span class="font-bold">Windows</span> environments.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="cpu" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">PC Building & Hardware</h3>
+                            <p class="text-gray-400">
+                                Hands-on experience with custom computer assembly, component selection, and optimization for performance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="separator"></div>
+
+        <section id="community" class="py-20 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="card-bg p-10 md:p-16 rounded-3xl border border-gray-800 shadow-2xl flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-3/5 mb-8 md:mb-0 md:pr-12">
+                        <h2 class="text-4xl font-extrabold mb-4">
+                            <span class="text-gradient">Connect</span> with Me
+                        </h2>
+                        <p class="text-lg text-gray-400">
+                            I am always open to chat. Connect with me on either platform.
+                        </p>
+                    </div>
+                    <div class="md:w-2/5 flex flex-col space-y-4 w-full">
+                        <a href="mailto:moaningtortoise@gmail.com" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl text-center transition duration-300 transform hover:scale-[1.02] shadow-lg shadow-indigo-600/50 hover-scale-fix">
+                            <i data-lucide="mail" class="w-5 h-5 inline-block mr-2"></i>
+                            Email
+                        </a>
+                        <a href="https://discord.com/users/1283955490740764694" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold py-3 px-6 rounded-xl text-center transition duration-300 transform hover:scale-[1.02] border border-gray-600 hover-scale-fix">
+                            <i data-lucide="message-circle" class="w-5 h-5 inline-block mr-2"></i>
+                            Discord
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="scroll-to-top" class="shadow-xl hover:bg-blue-700 hover-scale-fix">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </div>
+
+    <footer class="footer-gradient border-t border-gray-800 mt-16 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2025 MattFJ7. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="nav-link-footer">Home</a>
+                    <a href="#features" class="nav-link-footer">Skills</a>
+                    <a href="#community" class="nav-link-footer">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
