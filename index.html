@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MattFJ7</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/png">
+    <meta name="description" content="My personal website">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0d0d; }
+        ::-webkit-scrollbar-thumb { background-color: #3b82f6; border-radius: 20px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #2563eb; }
+        
+        :root { 
+            --background: #0d0d0d; 
+            --card-bg: #1a1a1a; 
+            --blue-glow: rgba(59, 130, 246, 0.5); 
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--background); 
+            color: #e5e7eb; 
+            min-height: 100vh; 
+            margin: 0; 
+            box-sizing: border-box; 
+            scrollbar-color: #3b82f6 #0d0d0d; 
+            scrollbar-width: thin; 
+            overflow-x: hidden; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .no-scroll { overflow: hidden; }
+
+        .parallax-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: var(--background); 
+            background-image: radial-gradient(#222 1px, transparent 0); 
+            background-size: 30px 30px; 
+            background-attachment: fixed; 
+            z-index: -1; 
+        }
+        @media (max-width: 767px) { .parallax-bg { background-attachment: scroll !important; } }
+
+        .text-gradient { 
+            background-image: linear-gradient(90deg, #3b82f6, #4f46e5); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            text-fill-color: transparent; 
+        }
+        .glass-header { 
+            backdrop-filter: blur(12px); 
+            background-color: rgba(13, 13, 13, 0.6); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06), 0 0 15px rgba(59, 130, 246, 0.15); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        .will-change-transform { will-change: transform; }
+
+        .nav-link, .nav-link-footer, .mobile-nav-link { 
+            position: relative; color: #d1d5db; padding: 6px 14px; border-radius: 8px; 
+            transition: color 0.2s ease-in-out; text-decoration: none; font-weight: 500; 
+            transform: translateZ(0);
+        }
+        .nav-link::after, .nav-link-footer::after, .mobile-nav-link::after { 
+            content: ''; position: absolute; left: 12px; right: 12px; bottom: 0; height: 2px; 
+            background-color: #3b82f6; 
+            transform: scaleX(0); transform-origin: bottom right; transition: transform 0.2s ease-out; 
+        }
+        .nav-link:hover, .nav-link-footer:hover, .mobile-nav-link:hover { color: #ffffff; }
+        .nav-link:hover::after, .nav-link-footer:hover::after, .mobile-nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        .mobile-nav-link::after { left: 12px; right: 12px; bottom: 8px; }
+
+        .animated-border-card { 
+            position: relative; background: var(--card-bg); border-radius: 1rem; padding: 1px; overflow: hidden; 
+            transform: translate3d(0,0,0); will-change: transform, box-shadow; 
+            transition: all 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.4); cursor: default; 
+        }
+        .animated-border-card:hover, .animated-border-card:focus, .animated-border-card.active-touch { 
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 5px 10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.6); 
+            transform: translateY(-5px) translateZ(0); 
+        }
+        .static-card-border { 
+            box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.4); 
+            background-color: var(--card-bg);
+            will-change: box-shadow; transform: translateZ(0);
+        }
+        .card-content { position: relative; z-index: 1; background-color: var(--card-bg); border-radius: 1rem; padding: 2rem; }
+
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 1; transition: opacity 0.5s ease-out; }
+        .loader { border: 6px solid #1a1a1a; border-top: 6px solid #3b82f6; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stagger-load-item {
+            opacity: 0; 
+            animation: fadeInSlide 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        #scroll-to-top { 
+            position: fixed; bottom: 100px; right: 20px; background-color: #3b82f6; color: white; padding: 12px; border-radius: 50%; cursor: pointer; 
+            opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; will-change: transform, opacity; transform: translateZ(0);
+        }
+        #scroll-to-top.show { opacity: 1; visibility: visible; }
+
+        .perspective-container { perspective: 1200px; }
+        .tilt-card { transform: rotateY(-12deg) rotateX(5deg); transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d; will-change: transform; }
+        .tilt-card:hover, .tilt-card.active-touch { transform: rotateY(0deg) rotateX(0deg) scale(1.02); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="parallax-bg"></div>
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    
+    <header class="sticky top-0 z-50 glass-header border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 relative">
+                <a href="#home" class="flex-shrink-0 flex items-center text-2xl font-extrabold z-10">Matthew</a>
+                
+                <nav class="hidden md:flex space-x-2 absolute left-1/2 transform -translate-x-1/2">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center space-x-4 z-10">
+                    <div class="hidden lg:flex items-center space-x-2 text-gray-400 bg-[#1a1a1a]/80 px-3 py-1.5 rounded-lg border border-gray-800/50 backdrop-blur-sm mr-2 stagger-load-item" style="animation-delay: 1.0s;">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-400"></i>
+                        <span id="current-time" class="font-mono text-xs tracking-wide">00:00 AM</span>
+                    </div>
+                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center space-x-2 text-gray-300 hover:text-white transition duration-200 will-change-transform">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition duration-200" aria-label="Toggle mobile menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-[#131313] border-t border-gray-800 py-2 transition-all duration-300 ease-in-out">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#services" class="mobile-nav-link">Services</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+                <div class="pt-4 space-y-2">
+                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center justify-center w-full space-x-2 text-gray-300 hover:text-white py-2 rounded-md border border-gray-700 hover:bg-gray-800 transition duration-200 will-change-transform">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section id="home" class="py-24 sm:py-32 lg:py-40 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative z-10"> 
+                <span class="text-sm font-semibold uppercase tracking-wider text-blue-400 mb-4 inline-block stagger-load-item" style="animation-delay: 0.2s;">Developer, Builder, and Creative</span>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 stagger-load-item" style="animation-delay: 0.4s;">Welcome to my <span class="text-gradient">Website</span></h1>
+                <p class="text-lg sm:text-xl text-gray-400 max-w-4xl mx-auto mb-10 stagger-load-item" style="animation-delay: 0.6s;">I'm Matthew, a <span class="font-bold">17-year-old from Canada</span> with an interest in <span class="font-bold">operating systems and gaming</span>.</p>
+            </div>
+            <div class="flex justify-center space-x-4 relative z-10 stagger-load-item" style="animation-delay: 0.8s;">
+                <a href="#skills" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition duration-300 shadow-lg shadow-blue-600/50 flex items-center justify-center will-change-transform">
+                    <span>View Skills</span>
+                    <i data-lucide="arrow-down" class="ml-2 w-5 h-5"></i>
+                </a>
+            </div>
+        </section>
+        
+        <section id="skills" class="py-20 sm:py-24 bg-[#111111] border-t border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">My Core <span class="text-gradient">Expertise</span></h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">My core technical capabilities, blending modern frontend development with specialized knowledge in operating systems and PC hardware.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="layout-grid" class="w-10 h-10 text-blue-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">Frontend Development</h3>
+                            <p class="text-gray-400">Building responsive user interfaces with <span class="font-bold">React, Next.js</span>, and modern CSS frameworks like <span class="font-bold">Tailwind CSS</span>.</p>
+                        </div>
+                    </div>
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="settings" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">Operating Systems</h3>
+                            <p class="text-gray-400">Expertise in system configuration and management for both <span class="font-bold">Linux</span> and <span class="font-bold">Windows</span> environments.</p>
+                        </div>
+                    </div>
+                    <div class="animated-border-card">
+                        <div class="card-content">
+                            <i data-lucide="cpu" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-3">PC Building & Hardware</h3>
+                            <p class="text-gray-400">Hands-on experience with custom computer assembly, component selection, and optimization for performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="services" class="py-20 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Web Development <span class="text-gradient">Services</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Want a website like this one? I can help you build your digital presence.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-10">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="bg-blue-900/20 p-3 rounded-xl text-blue-400 border border-blue-900/50">
+                                    <i data-lucide="palette" class="w-6 h-6"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2">Custom Design</h3>
+                                <p class="text-gray-400 leading-relaxed">I don't just use templates. I can create a unique look for your site with custom colors, layouts, and animations that fit your personal brand.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="bg-indigo-900/20 p-3 rounded-xl text-indigo-400 border border-indigo-900/50">
+                                    <i data-lucide="smartphone" class="w-6 h-6"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2">Fully Responsive</h3>
+                                <p class="text-gray-400 leading-relaxed">Your website will look professional and work perfectly on all devices—desktops, tablets, and mobile phones.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="bg-purple-900/20 p-3 rounded-xl text-purple-400 border border-purple-900/50">
+                                    <i data-lucide="code-2" class="w-6 h-6"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2">Modern Tech Stack</h3>
+                                <p class="text-gray-400 leading-relaxed">Built with the latest technologies like HTML5, Tailwind CSS, and JavaScript for fast performance and clean code.</p>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition duration-300 bg-blue-600 rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-600/50 will-change-transform">Start Your Project<i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <div class="perspective-container relative mt-12 lg:mt-0 flex justify-center">
+                        <div class="tilt-card relative bg-[#1a1a1a] border border-gray-700 rounded-xl overflow-hidden w-full max-w-md shadow-2xl shadow-blue-500/30">
+                            <div class="bg-[#111] px-4 py-3 flex items-center space-x-2 border-b border-gray-800">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors"></div>
+                                </div>
+                                <div class="flex-1 ml-4 bg-[#0d0d0d] rounded-md py-1 px-3 text-xs text-gray-500 font-mono text-center flex items-center justify-center gap-2 group cursor-text border border-transparent hover:border-gray-800 transition-colors"><i data-lucide="lock" class="w-3 h-3"></i>your-awesome-site.com</div>
+                            </div>
+                            <div class="p-6 space-y-6 bg-[#0d0d0d] min-h-[300px]">
+                                <div class="flex justify-between items-center mb-8">
+                                    <div class="h-4 w-24 bg-gray-800 rounded animate-pulse"></div>
+                                    <div class="flex space-x-3">
+                                        <div class="h-3 w-12 bg-gray-800 rounded"></div>
+                                        <div class="h-3 w-12 bg-gray-800 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center text-center space-y-4 py-8">
+                                    <div class="h-8 w-3/4 bg-gray-800 rounded animate-pulse mb-2"></div>
+                                    <div class="h-4 w-1/2 bg-gray-900 rounded"></div>
+                                    <div class="mt-6 h-10 w-32 bg-blue-600/20 border border-blue-600/50 rounded-lg shadow-[0_0_15px_rgba(37,99,235,0.2)]"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-8">
+                                    <div class="h-24 bg-gray-800/30 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors"></div>
+                                    <div class="h-24 bg-gray-800/30 rounded-lg border border-gray-800 hover:border-gray-700 transition-colors"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="py-20 sm:py-24 bg-[#111111] border-t border-gray-800 mb-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="static-card-border p-10 md:p-16 rounded-3xl flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-3/5 mb-8 md:mb-0 md:pr-12">
+                        <h2 class="text-4xl font-extrabold mb-4">
+                            <span class="text-gradient">Connect</span> with Me
+                        </h2>
+                        <p class="text-lg text-gray-400">
+                            I am always open to chat. Connect with me on either platform.
+                        </p>
+                    </div>
+                    <div class="md:w-2/5 flex flex-col space-y-4 w-full">
+                        <a href="mailto:moaningtortoise@gmail.com" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl text-center transition duration-300 shadow-lg shadow-indigo-600/50 will-change-transform w-full flex items-center justify-center">
+                            <i data-lucide="mail" class="w-6 h-6 mr-2"></i>Email
+                        </a>
+                        <a href="https://discord.com/users/1283955490740764694" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold py-3 px-6 rounded-xl text-center transition duration-300 shadow-lg shadow-gray-600/50 border border-gray-600 will-change-transform w-full flex items-center justify-center">
+                            <svg class="w-6 h-6 mr-2 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.2 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/></svg>
+                            Discord
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="scroll-to-top" class="shadow-xl hover:bg-blue-700 will-change-transform">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </div>
+    
+    <footer class="bg-[#0d0d0d] border-t border-gray-800 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2025 MattFJ7. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#home" class="nav-link-footer">Home</a>
+                    <a href="#skills" class="nav-link-footer">Skills</a>
+                    <a href="#services" class="nav-link-footer">Services</a>
+                    <a href="#contact" class="nav-link-footer">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    (function() {
+        const DOM = {
+            preloader: document.getElementById('preloader'),
+            mobileMenu: document.getElementById('mobile-menu'),
+            menuButton: document.getElementById('mobile-menu-button'),
+            body: document.body,
+            scrollTopButton: document.getElementById('scroll-to-top'),
+            timeElement: document.getElementById('current-time'),
+            hashLinks: document.querySelectorAll('a[href^="#"]'),
+        };
+
+        const handleScroll = (targetHref) => {
+            const targetElement = document.querySelector(targetHref);
+            if (targetElement) {
+                const scrollTarget = targetElement.offsetTop;
+                window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+            }
+        };
+
+        const toggleMenuIcon = (button, iconName) => {
+            const iconContainer = button.querySelector('i');
+            if (iconContainer && typeof lucide !== 'undefined') { 
+                iconContainer.innerHTML = lucide.createIcons({
+                    'tag': 'i',
+                    'name': iconName,
+                    'attributes': {'class': 'w-6 h-6'}
+                }).outerHTML;
+            }
+        };
+
+        const updateClock = () => {
+            if (DOM.timeElement) {
+                const now = new Date();
+                DOM.timeElement.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        };
+
+        const initMobileMenu = () => {
+            if (!DOM.menuButton || !DOM.mobileMenu) return;
+            
+            DOM.menuButton.addEventListener('click', () => {
+                const isHidden = DOM.mobileMenu.classList.toggle('hidden');
+                DOM.body.classList.toggle('no-scroll', !isHidden); 
+                toggleMenuIcon(DOM.menuButton, isHidden ? 'menu' : 'x');
+            });
+            
+            DOM.mobileMenu.querySelectorAll('a').forEach(link => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!DOM.mobileMenu.classList.contains('hidden')) {
+                            DOM.mobileMenu.classList.add('hidden');
+                            toggleMenuIcon(DOM.menuButton, 'menu');
+                            DOM.body.classList.remove('no-scroll');
+                        }
+                        handleScroll(this.getAttribute('href'));
+                    });
+                }
+            });
+        };
+        
+        const initSmoothScroll = () => {
+            DOM.hashLinks.forEach(anchor => {
+                if (anchor.getAttribute('href').startsWith('#') && !anchor.closest('#mobile-menu')) {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        handleScroll(this.getAttribute('href'));
+                    });
+                }
+            });
+        };
+
+        const initScrollTopButton = () => {
+            if (!DOM.scrollTopButton) return;
+            window.addEventListener('scroll', () => {
+                DOM.scrollTopButton.classList.toggle('show', (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300));
+            });
+            DOM.scrollTopButton.addEventListener('click', () => handleScroll('#home'));
+        };
+
+        const initCardTouchEffects = () => {
+            const allAnimatedCards = document.querySelectorAll('.animated-border-card, .tilt-card');
+
+            allAnimatedCards.forEach(card => {
+                const removeTouchClass = () => card.classList.remove('active-touch');
+                
+                card.addEventListener('touchstart', () => card.classList.add('active-touch'), { passive: true }); 
+                card.addEventListener('touchend', removeTouchClass);
+                card.addEventListener('touchcancel', removeTouchClass);
+                card.addEventListener('mouseleave', removeTouchClass); 
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            
+            if (DOM.preloader) {
+                DOM.preloader.style.opacity = '0';
+                setTimeout(() => { DOM.preloader.style.display = 'none'; }, 500); 
+            }
+
+            initMobileMenu();
+            initSmoothScroll();
+            initScrollTopButton();
+            initCardTouchEffects();
+
+            updateClock();
+            setInterval(updateClock, 60000);
+        });
+    })();
+    </script>
+</body>
+</html>
