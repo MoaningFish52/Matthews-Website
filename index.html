@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="assets/logo.png" type="image/png">
     <meta name="description" content="My personal website">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -333,7 +334,11 @@
     <footer class="bg-[#0d0d0d] border-t border-gray-800 py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-                <p>Made with <span class="text-blue-500">❤️</span> by Matthew</p>
+                <p class="flex items-center">
+                    Made with 
+                    <i data-lucide="heart" class="w-4 h-4 mx-1 fill-blue-500 text-blue-500"></i>
+                    by Matthew
+                </p>
                 <div class="flex space-x-4 mt-4 md:mt-0">
                     <a href="#home" class="nav-link-footer">Home</a>
                     <a href="#skills" class="nav-link-footer">Skills</a>
@@ -423,9 +428,24 @@
 
         const initScrollTopButton = () => {
             if (!DOM.scrollTopButton) return;
+            
+            // Optimization: Use requestAnimationFrame for smoother UI updates during scroll
+            // This prevents the browser from recalculating styles hundreds of times a second
+            let isScrolling = false;
+            
+            const checkScroll = () => {
+                const shouldShow = window.scrollY > 300;
+                DOM.scrollTopButton.classList.toggle('show', shouldShow);
+                isScrolling = false;
+            };
+
             window.addEventListener('scroll', () => {
-                DOM.scrollTopButton.classList.toggle('show', (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300));
-            });
+                if (!isScrolling) {
+                    window.requestAnimationFrame(checkScroll);
+                    isScrolling = true;
+                }
+            }, { passive: true }); // passive: true improves scroll performance on mobile
+            
             DOM.scrollTopButton.addEventListener('click', () => handleScroll('#home'));
         };
 
