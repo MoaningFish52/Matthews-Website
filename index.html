@@ -345,6 +345,9 @@
     </footer>
     
     <script>
+    /* * Core application logic encapsulated in an Immediately Invoked Function Expression (IIFE)
+     * to avoid polluting the global scope.
+     */
     (function() {
         const DOM = {
             preloader: document.getElementById('preloader'),
@@ -387,6 +390,7 @@
             
             DOM.menuButton.addEventListener('click', () => {
                 const isHidden = DOM.mobileMenu.classList.toggle('hidden');
+                // Toggle scroll lock on the body when the menu is open
                 DOM.body.classList.toggle('no-scroll', !isHidden); 
                 toggleMenuIcon(DOM.menuButton, isHidden ? 'menu' : 'x');
             });
@@ -431,6 +435,7 @@
             allAnimatedCards.forEach(card => {
                 const removeTouchClass = () => card.classList.remove('active-touch');
                 
+                // Use { passive: true } for touch events to prevent scroll jank
                 card.addEventListener('touchstart', () => card.classList.add('active-touch'), { passive: true }); 
                 card.addEventListener('touchend', removeTouchClass);
                 card.addEventListener('touchcancel', removeTouchClass);
@@ -452,6 +457,7 @@
             initCardTouchEffects();
 
             updateClock();
+            // Update the clock every 60 seconds (1 minute) for battery efficiency
             setInterval(updateClock, 60000);
         });
     })();
