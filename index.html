@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matthew - Developer & Creative. Personal portfolio and project showcase.">
     <title>MattFJ7 | Developer & Creative</title>
+    
     <link rel="icon" type="image/webp" href="assets/logo.webp">
     <link rel="shortcut icon" href="assets/logo.webp" type="image/webp">
-    <meta name="description" content="My personal website, portfolio, and project request contact page.">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
     
     <style>
+        /* --- 1. Variables & Global Resets --- */
         :root {
             --background: #0a0a0a;
             --card-bg: #171717;
             --primary: #3b82f6;
-            --secondary: #6366f1;
         }
 
         body {
@@ -26,23 +30,21 @@
             background-color: var(--background);
             color: #f3f4f6;
             overflow-x: hidden;
-            selection-background-color: rgba(59, 130, 246, 0.3);
-            selection-color: #ffffff;
         }
 
-        ::selection {
-            background: rgba(59, 130, 246, 0.3);
-            color: white;
-        }
-
+        /* --- 2. Selection & Scrollbar --- */
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+        
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--background); }
         ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 20px; }
         ::-webkit-scrollbar-thumb:hover { background-color: var(--primary); }
 
-        .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0; }
+        /* --- 3. Utilities --- */
         .no-scroll { overflow: hidden; }
+        .perspective-container { perspective: 1200px; }
         
+        /* Text Gradient */
         .text-gradient { 
             background: linear-gradient(to right, #60a5fa, #818cf8, #c084fc); 
             -webkit-background-clip: text; 
@@ -52,12 +54,7 @@
             animation: gradientFlow 5s linear infinite;
         }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
+        /* Backgrounds */
         .parallax-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--background);
@@ -79,12 +76,14 @@
             transition: all 0.3s ease;
         }
 
+        /* --- 4. Component Styles --- */
+        
+        /* Navigation */
         .nav-link, .nav-link-footer, .mobile-nav-link {
             position: relative; color: #9ca3af; padding: 6px 14px;
             transition: color 0.2s ease-in-out; text-decoration: none; font-weight: 500;
         }
         .nav-link:hover, .nav-link-footer:hover, .mobile-nav-link:hover { color: #ffffff; }
-        
         .nav-link::before {
             content: ''; position: absolute; inset: 0; border-radius: 8px;
             background: rgba(255,255,255,0.05); transform: scale(0.8); opacity: 0;
@@ -92,6 +91,7 @@
         }
         .nav-link:hover::before { transform: scale(1); opacity: 1; }
 
+        /* Cards */
         .animated-border-card {
             position: relative; 
             background: rgba(255, 255, 255, 0.03); 
@@ -101,21 +101,12 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
         }
-
+        .animated-border-card:hover { transform: translateY(-4px); }
         .card-content { 
-            position: relative; 
-            z-index: 10; 
-            background: #171717; 
-            border-radius: 1rem; 
-            padding: 2rem; 
-            height: 100%; 
+            position: relative; z-index: 10; background: #171717; 
+            border-radius: 1rem; padding: 2rem; height: 100%; 
         }
 
-        .animated-border-card:hover { 
-            transform: translateY(-4px); 
-        }
-        
-        .perspective-container { perspective: 1200px; }
         .tilt-card {
             transform: rotateY(-12deg) rotateX(5deg);
             transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -124,23 +115,15 @@
         }
         .tilt-card:hover, .tilt-card.active-touch { transform: rotateY(0deg) rotateX(0deg) scale(1.02); }
 
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--background); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease-out, visibility 0.5s;
+        /* Buttons */
+        .btn-glow { position: relative; overflow: hidden; transition: all 0.3s ease; }
+        .btn-glow::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
-        .loader {
-            width: 48px; height: 48px; border: 3px solid #FFF;
-            border-bottom-color: var(--primary); border-radius: 50%;
-            display: inline-block; box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        @keyframes fadeInSlide { from { opacity: 0; transform: translateY(30px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-        .scroll-animate { opacity: 0; transform: translateY(30px); will-change: opacity, transform; }
-        .scroll-animate.is-visible { animation: fadeInSlide 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .btn-glow:hover::after { left: 100%; }
+        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.5); }
 
         #scroll-to-top {
             position: fixed; bottom: 30px; right: 20px;
@@ -153,35 +136,73 @@
         #scroll-to-top:hover { transform: translateY(0) scale(1.1); background-color: #2563eb; }
         #scroll-to-top.show { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
 
-        .btn-glow {
-            position: relative; overflow: hidden; transition: all 0.3s ease;
+        /* --- 5. Animations --- */
+        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeInSlide { from { opacity: 0; transform: translateY(30px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        
+        /* Loader */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--background); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
         }
-        .btn-glow::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
+        .loader {
+            width: 48px; height: 48px; border: 3px solid #FFF;
+            border-bottom-color: var(--primary); border-radius: 50%;
+            display: inline-block; box-sizing: border-box;
+            animation: rotation 1s linear infinite;
         }
-        .btn-glow:hover::after { left: 100%; }
-        .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.5); }
+
+        /* Scroll Reveal */
+        .scroll-animate { opacity: 0; transform: translateY(30px); will-change: opacity, transform; }
+        .scroll-animate.is-visible { animation: fadeInSlide 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* Marquee (Modified for JS Dragging) */
+        .marquee-container {
+            width: 100%; overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            user-select: none; /* Prevent text selection while dragging */
+            -webkit-user-select: none;
+        }
+        .marquee-content { 
+            display: inline-flex; 
+            width: max-content;
+            cursor: grab; /* Visual cue that it's draggable */
+            will-change: transform; /* Performance hint for browser */
+        }
+        .marquee-content:active {
+            cursor: grabbing;
+        }
+        .marquee-item {
+            display: inline-flex; align-items: center; padding: 0 2rem;
+            color: #9ca3af; font-weight: 500; font-size: 0.95rem;
+            transition: color 0.3s ease; white-space: nowrap;
+            pointer-events: none; /* Let drag events pass through items */
+        }
+        .marquee-item i, .marquee-item svg {
+            pointer-events: none;
+        }
+        .marquee-item:hover { color: white; }
     </style>
 </head>
 <body class="min-h-screen">
-    <div class="parallax-bg"></div>
-    
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
+    <div class="parallax-bg" aria-hidden="true"></div>
+    <div id="preloader"><div class="loader"></div></div>
     
     <header class="sticky top-0 z-50 glass-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 relative">
                 <a href="#home" class="flex-shrink-0 flex items-center text-xl font-bold z-10 tracking-tight hover:text-blue-400 transition-colors duration-300" id="header-home-link">
-                    Matthew<span class="text-blue-500">.</span>
+                    Matthew
                 </a>
                 
                 <nav id="desktop-nav" class="hidden md:flex space-x-1 absolute left-1/2 transform -translate-x-1/2 bg-white/5 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/5">
                     <a href="#skills" class="nav-link text-sm">Skills</a>
                     <a href="#services" class="nav-link text-sm">Services</a>
+                    <a href="#projects" class="nav-link text-sm">Projects</a>
                     <a href="#contact" class="nav-link text-sm">Contact</a>
                 </nav>
                 
@@ -190,7 +211,7 @@
                         <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-400" aria-hidden="true"></i>
                         <span id="current-time" class="font-mono text-xs tracking-wide text-gray-300">--:--</span>
                     </div>
-                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center space-x-2 text-gray-400 hover:text-white transition duration-200">
+                    <a href="https://github.com/MoaningFish52" target="_blank" aria-label="GitHub Profile" class="flex items-center space-x-2 text-gray-400 hover:text-white transition duration-200">
                         <i data-lucide="github" class="w-5 h-5" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -205,6 +226,7 @@
             <div class="px-4 space-y-2">
                 <a href="#skills" class="block mobile-nav-link text-lg">Skills</a>
                 <a href="#services" class="block mobile-nav-link text-lg">Services</a>
+                <a href="#projects" class="block mobile-nav-link text-lg">Projects</a>
                 <a href="#contact" class="block mobile-nav-link text-lg">Contact</a>
                 <div class="pt-4 mt-4 border-t border-white/10">
                     <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center justify-center w-full space-x-2 text-gray-300 hover:text-white py-3 rounded-xl border border-white/10 hover:bg-white/5 transition duration-200">
@@ -218,8 +240,9 @@
     
     <main>
         <div id="main-content-pages">
+            
             <section id="home" class="py-24 sm:py-32 lg:py-40 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -z-10"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -z-10" aria-hidden="true"></div>
                 
                 <div class="relative z-10">
                     <div class="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1 mb-6 scroll-animate backdrop-blur-sm">
@@ -244,9 +267,37 @@
                         Explore Work
                         <i data-lucide="arrow-down" class="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="#contact" class="bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold py-3.5 px-8 rounded-xl text-lg transition duration-300 flex items-center justify-center backdrop-blur-sm">
+                    <a href="mailto:moaningtortoise@gmail.com" class="bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold py-3.5 px-8 rounded-xl text-lg transition duration-300 flex items-center justify-center backdrop-blur-sm">
                         Contact Me
                     </a>
+                </div>
+
+                <div class="mt-16 relative z-10 w-full max-w-4xl mx-auto scroll-animate" style="animation-delay: 0.2s;">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-6 text-center">Tech Stack & Platforms</p>
+                    
+                    <div class="marquee-container">
+                        <div class="marquee-content" id="draggable-marquee">
+                            <div class="marquee-item"><i class="fa-brands fa-html5 text-orange-500 text-xl mr-2"></i> HTML5</div>
+                            <div class="marquee-item"><i class="fa-brands fa-css3-alt text-blue-500 text-xl mr-2"></i> CSS3</div>
+                            <div class="marquee-item"><i class="fa-brands fa-js text-yellow-400 text-xl mr-2"></i> JavaScript</div>
+                            <div class="marquee-item"><i class="fa-brands fa-react text-cyan-400 text-xl mr-2"></i> React</div>
+                            <div class="marquee-item">
+                                <svg class="w-5 h-5 mr-2 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.002c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2.002 0c0-5.523-4.477-10-10-10-5.522 0-9.998 4.477-9.998 10 0 5.522 4.476 10 9.998 10 5.523 0 10-4.478 10-10zm-5.69 4.39l-4.708-6.152v6.152h-1.637v-9.155h1.76l4.646 6.064v-6.064h1.638v9.155h-1.7z"/></svg> Next.js
+                            </div>
+                            <div class="marquee-item"><i class="fa-brands fa-windows text-blue-400 text-xl mr-2"></i> Windows</div>
+                            <div class="marquee-item"><i class="fa-brands fa-linux text-yellow-500 text-xl mr-2"></i> Linux</div>
+                            
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-html5 text-orange-500 text-xl mr-2"></i> HTML5</div>
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-css3-alt text-blue-500 text-xl mr-2"></i> CSS3</div>
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-js text-yellow-400 text-xl mr-2"></i> JavaScript</div>
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-react text-cyan-400 text-xl mr-2"></i> React</div>
+                            <div class="marquee-item" aria-hidden="true">
+                                <svg class="w-5 h-5 mr-2 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.002c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2.002 0c0-5.523-4.477-10-10-10-5.522 0-9.998 4.477-9.998 10 0 5.522 4.476 10 9.998 10 5.523 0 10-4.478 10-10zm-5.69 4.39l-4.708-6.152v6.152h-1.637v-9.155h1.76l4.646 6.064v-6.064h1.638v9.155h-1.7z"/></svg> Next.js
+                            </div>
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-windows text-blue-400 text-xl mr-2"></i> Windows</div>
+                            <div class="marquee-item" aria-hidden="true"><i class="fa-brands fa-linux text-yellow-500 text-xl mr-2"></i> Linux</div>
+                        </div>
+                    </div>
                 </div>
             </section>
             
@@ -346,7 +397,7 @@
                         </div>
                         
                         <div class="perspective-container relative mt-12 lg:mt-0 flex justify-center scroll-animate">
-                            <div class="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full z-0 transform translate-y-10"></div>
+                            <div class="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full z-0 transform translate-y-10" aria-hidden="true"></div>
                             <div class="tilt-card relative bg-[#121212] border border-white/10 rounded-2xl overflow-hidden w-full max-w-md shadow-2xl z-10">
                                 <div class="bg-[#1a1a1a] px-5 py-4 flex items-center space-x-3 border-b border-white/5">
                                     <div class="flex space-x-2">
@@ -379,11 +430,57 @@
                     </div>
                 </div>
             </section>
+
+            <section id="projects" class="py-24 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 scroll-animate">
+                        <h2 class="text-3xl sm:text-5xl font-bold mb-4 tracking-tight">Featured <span class="text-gradient">Projects</span></h2>
+                        <p class="text-gray-400 max-w-2xl mx-auto text-lg">A selection of my personal projects, tools, and experiments.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="group relative rounded-2xl bg-[#0d0d0d] border border-white/10 p-1 overflow-hidden scroll-animate hover:border-blue-500/30 transition-all duration-300">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-20"></div>
+                            
+                            <div class="relative h-full bg-[#121212] rounded-xl p-8 flex flex-col z-10">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 border border-blue-500/10">
+                                        <i data-lucide="terminal" class="w-6 h-6"></i>
+                                    </div>
+                                    <a href="https://github.com/MoaningFish52/MattScript" target="_blank" class="text-gray-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg">
+                                        <i data-lucide="github" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">MattScript</h3>
+                                
+                                <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+                                    A comprehensive PowerShell script to remove pre-installed bloatware, disable intrusive telemetry.
+                                </p>
+                                
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <span class="text-xs font-mono text-blue-300 bg-blue-500/10 px-2 py-1 rounded border border-blue-500/10">PowerShell</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">Windows</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">Scripting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-2xl bg-white/5 border border-white/5 p-8 flex flex-col items-center justify-center text-center scroll-animate min-h-[300px] border-dashed">
+                            <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 text-gray-500">
+                                <i data-lucide="plus" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-300 mb-2">More Coming Soon</h3>
+                            <p class="text-sm text-gray-500 max-w-xs">I'm currently working on new things.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-            <section id="contact" class="py-24 mb-10 relative">
+            <section id="contact" class="py-24 relative bg-white/5 border-y border-white/5 mb-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="relative bg-gradient-to-br from-[#171717] to-[#121212] border border-white/10 p-10 md:p-16 rounded-3xl overflow-hidden scroll-animate shadow-2xl">
-                        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[80px]"></div>
+                        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[80px]" aria-hidden="true"></div>
                         
                         <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                             <div class="md:w-3/5 text-center md:text-left">
@@ -395,11 +492,11 @@
                                 </p>
                             </div>
                             <div class="md:w-2/5 flex flex-col sm:flex-row gap-4 w-full">
-                                <a href="mailto:moaningtortoise@gmail.com" class="btn-glow flex-1 bg-white text-black font-bold py-4 px-6 rounded-xl text-center transition duration-300 flex items-center justify-center hover:bg-gray-100">
-                                    <i data-lucide="mail" class="w-5 h-5 mr-2"></i> Email
+                                <a href="https://steamcommunity.com/id/MattFJ7/" target="_blank" class="btn-glow flex-1 bg-[#171a21] hover:bg-[#2a475e] text-white font-bold py-4 px-6 rounded-xl text-center transition duration-300 flex items-center justify-center border border-white/10 shadow-lg">
+                                    <i class="fa-brands fa-steam w-5 h-5 mr-2 translate-y-[1px]"></i> Steam
                                 </a>
                                 <a href="https://discord.com/users/1283955490740764694" target="_blank" class="flex-1 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold py-4 px-6 rounded-xl text-center transition duration-300 shadow-lg shadow-[#5865F2]/20 flex items-center justify-center">
-                                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> Discord
+                                    <i class="fa-brands fa-discord w-5 h-5 mr-2"></i> Discord
                                 </a>
                             </div>
                         </div>
@@ -409,7 +506,7 @@
         </div>
 
         <div id="project-form-page" class="py-24 hidden relative min-h-screen">
-            <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] -z-10"></div>
+            <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] -z-10" aria-hidden="true"></div>
             
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12 scroll-animate">
@@ -473,20 +570,21 @@
         </div>
     </main>
     
-    <div id="scroll-to-top">
+    <div id="scroll-to-top" aria-label="Scroll to top">
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </div>
     
-    <footer class="bg-[#050505] border-t border-white/5 py-12">
+    <footer class="bg-[#050505] border-t border-white/5 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <span class="text-xl font-bold tracking-tight">Matthew<span class="text-blue-500">.</span></span>
+                    <span class="text-xl font-bold tracking-tight">Matthew</span>
                     <p class="text-sm text-gray-500 mt-1">&copy; 2025 All rights reserved.</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="#skills" class="nav-link-footer text-sm text-gray-500">Skills</a>
                     <a href="#services" class="nav-link-footer text-sm text-gray-500">Services</a>
+                    <a href="#projects" class="nav-link-footer text-sm text-gray-500">Projects</a>
                     <a href="#contact" class="nav-link-footer text-sm text-gray-500">Contact</a>
                 </div>
             </div>
@@ -494,6 +592,7 @@
     </footer>
     
     <script>
+    /* --- Constants & DOM Elements --- */
     const DOM = {
         preloader: document.getElementById('preloader'),
         body: document.body,
@@ -508,17 +607,15 @@
         header: document.querySelector('.glass-header'),
     };
     
+    /* --- Helper Functions --- */
     const handleScrollToSection = (targetHref) => {
         const targetElement = document.querySelector(targetHref);
         if (targetElement) {
             const headerOffset = 80;
             const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
             
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
     };
 
@@ -539,12 +636,6 @@
     };
 
     const initAnimations = () => {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -50px 0px',
-            threshold: 0.15
-        };
-
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -553,17 +644,83 @@
                     if(container) {
                          const siblings = Array.from(container.children).filter(c => c.classList.contains('scroll-animate'));
                          const index = siblings.indexOf(targetEl);
-                         if (index > 0) {
-                             targetEl.style.animationDelay = `${index * 0.1}s`;
-                         }
+                         if (index > 0) targetEl.style.animationDelay = `${index * 0.1}s`;
                     }
                     targetEl.classList.add('is-visible');
                     obs.unobserve(targetEl);
                 }
             });
-        }, observerOptions);
+        }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 });
 
         document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+    };
+
+    /* --- Marquee Logic --- */
+    const initMarquee = () => {
+        const marqueeContent = document.getElementById('draggable-marquee');
+        if (!marqueeContent) return;
+
+        // Clone content to ensure infinite scroll illusion
+        const originalContent = marqueeContent.innerHTML;
+        marqueeContent.innerHTML += originalContent + originalContent; // x3 width
+
+        let scrollPos = 0;
+        let isDragging = false;
+        let startX = 0;
+        let lastScrollPos = 0;
+        let animationId;
+        const baseSpeed = 0.5;
+
+        const animate = () => {
+            if (!isDragging) {
+                scrollPos -= baseSpeed;
+            }
+
+            // Infinite loop logic
+            const totalWidth = marqueeContent.scrollWidth;
+            const oneSetWidth = totalWidth / 3;
+
+            if (scrollPos <= -oneSetWidth) {
+                scrollPos += oneSetWidth;
+            }
+            if (scrollPos > 0) {
+                scrollPos -= oneSetWidth;
+            }
+
+            marqueeContent.style.transform = `translateX(${scrollPos}px)`;
+            animationId = requestAnimationFrame(animate);
+        };
+
+        const startDrag = (e) => {
+            isDragging = true;
+            startX = (e.pageX || e.touches[0].pageX) - marqueeContent.offsetLeft;
+            lastScrollPos = scrollPos;
+            marqueeContent.style.cursor = 'grabbing';
+        };
+
+        const moveDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = (e.pageX || e.touches[0].pageX) - marqueeContent.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            scrollPos = lastScrollPos + walk;
+        };
+
+        const stopDrag = () => {
+            isDragging = false;
+            marqueeContent.style.cursor = 'grab';
+        };
+
+        marqueeContent.addEventListener('mousedown', startDrag);
+        marqueeContent.addEventListener('touchstart', startDrag, { passive: false });
+
+        window.addEventListener('mousemove', moveDrag);
+        window.addEventListener('touchmove', moveDrag, { passive: false });
+
+        window.addEventListener('mouseup', stopDrag);
+        window.addEventListener('touchend', stopDrag);
+
+        animate();
     };
 
     const toggleProjectPage = (showForm) => {
@@ -572,6 +729,7 @@
             DOM.projectFormPage.classList.remove('hidden');
             window.scrollTo(0,0);
             
+            // Reset animations in form page
             document.querySelectorAll('#project-form-page .scroll-animate').forEach(el => {
                 el.classList.remove('is-visible');
                 setTimeout(() => el.classList.add('is-visible'), 50);
@@ -585,10 +743,12 @@
         }
     };
 
+    /* --- Form Validation --- */
     const validateField = (field, errorMessageId, rules = {}) => {
         const errorElement = document.getElementById(errorMessageId);
         const value = field.value.trim();
         
+        // Reset state
         errorElement.textContent = '';
         field.classList.remove('border-red-500', 'focus:ring-red-500');
         field.classList.add('border-white/10', 'focus:ring-blue-500/50');
@@ -616,6 +776,7 @@
         return isValid;
     };
 
+    /* --- Event Handlers --- */
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         
@@ -629,9 +790,7 @@
         let isFormValid = true;
         fields.forEach(f => {
             const fieldEl = document.getElementById(f.id);
-            if (!validateField(fieldEl, f.errorId, f.rules)) {
-                isFormValid = false;
-            }
+            if (!validateField(fieldEl, f.errorId, f.rules)) isFormValid = false;
         });
 
         if (!isFormValid) return;
@@ -668,34 +827,37 @@
         }
     };
 
+    /* --- Initialization --- */
     const initialize = () => {
+        // Preloader
         window.addEventListener('load', () => {
             DOM.preloader.style.opacity = '0';
             setTimeout(() => {
                 DOM.preloader.style.visibility = 'hidden';
                 DOM.body.classList.remove('no-scroll');
                 initAnimations();
+                initMarquee();
             }, 500);
         });
 
         lucide.createIcons();
         startClock();
 
+        // Interactive Card Effects
         const skillCards = document.querySelectorAll('.animated-border-card');
         skillCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
                 card.style.background = `radial-gradient(400px circle at ${x}px ${y}px, rgba(59, 130, 246, 0.4), transparent 60%), rgba(255, 255, 255, 0.03)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.background = `rgba(255, 255, 255, 0.03)`;
             });
         });
 
+        // Touch Interaction
         const allCards = document.querySelectorAll('.animated-border-card, .tilt-card');
         allCards.forEach(card => {
             card.addEventListener('touchstart', () => {
@@ -710,6 +872,7 @@
             }
         }, { passive: true });
 
+        // Mobile Menu
         DOM.menuButton.addEventListener('click', () => {
             const isHidden = DOM.mobileMenu.classList.contains('hidden');
             if (isHidden) {
@@ -724,6 +887,7 @@
             lucide.createIcons();
         });
 
+        // Navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -732,7 +896,7 @@
                 if (targetHref === '#project') {
                     toggleProjectPage(true);
                 } else if (targetHref === '#home' && !DOM.projectFormPage.classList.contains('hidden')) {
-                     toggleProjectPage(false);
+                      toggleProjectPage(false);
                 } else {
                     if (!DOM.projectFormPage.classList.contains('hidden')) {
                         toggleProjectPage(false);
@@ -751,6 +915,7 @@
             });
         });
 
+        // Scroll Logic
         let isScrolling = false;
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
