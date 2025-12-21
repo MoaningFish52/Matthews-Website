@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matthew - Developer & Creative">
+    <title>MattFJ7 | Developer & Creative</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        background: '#0a0a0a',
+                        card: '#171717',
+                        primary: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    
+    <link rel="icon" type="image/webp" href="assets/logo.webp">
+    <link rel="shortcut icon" href="assets/logo.webp" type="image/webp">
+</head>
+
+<body class="min-h-screen no-scroll text-gray-100 font-sans">
+    
+    <div class="parallax-bg" aria-hidden="true"></div>
+    <div id="preloader"><div class="loader"></div></div>
+
+    <header class="sticky top-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 relative">
+                <a href="#home" class="flex-shrink-0 flex items-center text-xl font-bold z-10 tracking-tight hover:text-blue-400 transition-colors duration-300" id="header-home-link">Matthew</a>
+                
+                <nav id="desktop-nav" class="hidden md:flex space-x-1 absolute left-1/2 transform -translate-x-1/2 bg-white/5 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/5">
+                    <a href="#skills" class="nav-link text-sm">Skills</a>
+                    <a href="#services" class="nav-link text-sm">Services</a>
+                    <a href="#projects" class="nav-link text-sm">Projects</a>
+                    <a href="#contact" class="nav-link text-sm">Contact</a>
+                </nav>
+
+                <div id="header-socials" class="hidden md:flex items-center space-x-4 z-10">
+                    <div id="time-widget" class="hidden lg:flex items-center space-x-2 text-gray-400 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5 backdrop-blur-sm mr-2 scroll-animate">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-400" aria-hidden="true"></i>
+                        <span id="current-time" class="font-mono text-xs tracking-wide text-gray-300">--:--</span>
+                    </div>
+                    <a href="https://github.com/MoaningFish52" target="_blank" aria-label="GitHub Profile" class="flex items-center space-x-2 text-gray-400 hover:text-white transition duration-200">
+                        <i data-lucide="github" class="w-5 h-5" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://steamcommunity.com/id/MattFJ7/" target="_blank" aria-label="Steam Profile" class="flex items-center space-x-2 text-gray-400 hover:text-white transition duration-200">
+                        <i class="fa-brands fa-steam text-xl" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition duration-200" aria-label="Toggle mobile menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0a0a] border-t border-white/10 py-4 transition-all duration-300 ease-in-out absolute w-full left-0 shadow-2xl">
+            <div class="px-4 space-y-2">
+                <a href="#skills" class="block mobile-nav-link text-lg">Skills</a>
+                <a href="#services" class="block mobile-nav-link text-lg">Services</a>
+                <a href="#projects" class="block mobile-nav-link text-lg">Projects</a>
+                <a href="#contact" class="block mobile-nav-link text-lg">Contact</a>
+                <div class="pt-4 mt-4 border-t border-white/10 flex flex-col space-y-3">
+                    <a href="https://github.com/MoaningFish52" target="_blank" class="flex items-center justify-center w-full space-x-2 text-gray-300 hover:text-white py-3 rounded-xl border border-white/10 hover:bg-white/5 transition duration-200">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://steamcommunity.com/id/MattFJ7/" target="_blank" class="flex items-center justify-center w-full space-x-2 text-gray-300 hover:text-white py-3 rounded-xl border border-white/10 hover:bg-white/5 transition duration-200">
+                        <i class="fa-brands fa-steam text-xl"></i>
+                        <span>Steam</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="main-content-pages">
+            
+            <section id="home" class="py-24 sm:py-32 lg:py-40 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -z-10" aria-hidden="true"></div>
+                
+                <div class="relative z-10">
+                    <div class="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1 mb-6 scroll-animate backdrop-blur-sm">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        <span class="text-xs font-medium uppercase tracking-wider text-blue-300">Open to work</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 scroll-animate tracking-tight leading-tight">
+                        <span class="text-gradient">Welcome to my Website</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 scroll-animate leading-relaxed">
+                        I'm Matthew, an <span class="text-gray-100 font-medium">18-year-old Canadian</span> with an interest in operating systems and gaming.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 relative z-10 scroll-animate">
+                    <a href="#skills" class="btn-glow bg-blue-600 text-white font-semibold py-3.5 px-8 rounded-xl text-lg flex items-center justify-center group">
+                        Explore Work
+                        <i data-lucide="arrow-down" class="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                    <button id="contact-btn" class="bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold py-3.5 px-8 rounded-xl text-lg transition duration-300 flex items-center justify-center backdrop-blur-sm cursor-pointer">
+                        Contact Me
+                        <i data-lucide="copy" class="ml-2 w-4 h-4 opacity-70"></i>
+                    </button>
+                </div>
+
+                <div class="mt-16 relative z-10 w-full max-w-4xl mx-auto scroll-animate" style="animation-delay: 0.2s;">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-6 text-center">Tech Stack & Platforms</p>
+                    <div class="marquee-container">
+                        <div class="marquee-content" id="draggable-marquee">
+                            <div class="marquee-item"><i class="fa-brands fa-html5 text-orange-500 text-xl mr-2"></i> HTML5</div>
+                            <div class="marquee-item"><i class="fa-brands fa-css3-alt text-blue-500 text-xl mr-2"></i> CSS3</div>
+                            <div class="marquee-item"><i class="fa-brands fa-js text-yellow-400 text-xl mr-2"></i> JavaScript</div>
+                            <div class="marquee-item"><i class="fa-brands fa-react text-cyan-400 text-xl mr-2"></i> React</div>
+                            <div class="marquee-item">
+                                <svg class="w-5 h-5 mr-2 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.002c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2.002 0c0-5.523-4.477-10-10-10-5.522 0-9.998 4.477-9.998 10 0 5.522 4.476 10 9.998 10 5.523 0 10-4.478 10-10zm-5.69 4.39l-4.708-6.152v6.152h-1.637v-9.155h1.76l4.646 6.064v-6.064h1.638v9.155h-1.7z"/></svg> Next.js
+                            </div>
+                            <div class="marquee-item"><i class="fa-brands fa-windows text-blue-400 text-xl mr-2"></i> Windows</div>
+                            <div class="marquee-item"><i class="fa-brands fa-linux text-yellow-500 text-xl mr-2"></i> Linux</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="py-24 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 scroll-animate">
+                        <h2 class="text-3xl sm:text-5xl font-bold mb-4 tracking-tight">My Core <span class="text-gradient">Expertise</span></h2>
+                        <p class="text-gray-300 max-w-2xl mx-auto text-lg">My core technical capabilities, blending modern frontend development with specialized knowledge in operating systems and PC hardware.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                        <div class="animated-border-card scroll-animate group">
+                            <div class="card-content flex flex-col items-start">
+                                <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
+                                    <i data-lucide="layout-grid" class="w-6 h-6 text-blue-400"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-100">Frontend Development</h3>
+                                <p class="text-gray-400 leading-relaxed text-sm">Building responsive user interfaces with <span class="text-blue-400 font-bold">React, Next.js,</span> and modern CSS frameworks like <span class="text-blue-400 font-bold">Tailwind CSS.</span></p>
+                            </div>
+                        </div>
+                        <div class="animated-border-card scroll-animate group">
+                            <div class="card-content flex flex-col items-start">
+                                <div class="w-12 h-12 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition-colors">
+                                    <i data-lucide="settings" class="w-6 h-6 text-indigo-400"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-100">Operating Systems</h3>
+                                <p class="text-gray-400 leading-relaxed text-sm">Expertise in system configuration and management for both <span class="text-indigo-400 font-bold">Linux</span> and <span class="text-indigo-400 font-bold">Windows</span> environments.</p>
+                            </div>
+                        </div>
+                        <div class="animated-border-card scroll-animate group">
+                            <div class="card-content flex flex-col items-start">
+                                <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-6 group-hover:bg-purple-500/20 transition-colors">
+                                    <i data-lucide="cpu" class="w-6 h-6 text-purple-400"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3 text-gray-100">PC Building & Hardware</h3>
+                                <p class="text-gray-400 leading-relaxed text-sm">Hands-on experience with custom computer assembly, component selection, and optimization for performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="py-24 bg-white/5 border-y border-white/5">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-12">
+                            <div class="scroll-animate">
+                                <h2 class="text-3xl sm:text-5xl font-bold mb-6 tracking-tight">Web Development <span class="text-gradient">Services</span></h2>
+                                <p class="text-lg text-gray-300 leading-relaxed">Want a website like this one? I can help you build your digital presence.</p>
+                            </div>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start space-x-5 scroll-animate group">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="bg-blue-500/10 p-3 rounded-xl text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                                            <i data-lucide="palette" class="w-5 h-5"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-white mb-2">Custom Design</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">I don't just use templates. I can create a unique look for your site with custom colors, layouts, and animations that fit your personal brand.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-5 scroll-animate group" style="animation-delay: 0.1s;">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="bg-indigo-500/10 p-3 rounded-xl text-indigo-400 border border-indigo-500/20 group-hover:bg-indigo-500/20 transition-colors">
+                                            <i data-lucide="smartphone" class="w-5 h-5"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-white mb-2">Fully Responsive</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Your website will look professional and work perfectly on all devices—desktops, tablets, and mobile phones.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-5 scroll-animate group" style="animation-delay: 0.2s;">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="bg-purple-500/10 p-3 rounded-xl text-purple-400 border border-purple-500/20 group-hover:bg-purple-500/20 transition-colors">
+                                            <i data-lucide="code-2" class="w-5 h-5"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-bold text-white mb-2">Modern Tech Stack</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Built with the latest technologies like HTML5, Tailwind CSS, and JavaScript for fast performance and clean code.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-4 scroll-animate">
+                                <a href="#project" id="start-project-link" class="btn-glow inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700">
+                                    Start Your Project <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="perspective-container relative mt-12 lg:mt-0 flex justify-center scroll-animate">
+                            <div class="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full z-0 transform translate-y-10" aria-hidden="true"></div>
+                            <div class="tilt-card relative bg-[#121212] border border-white/10 rounded-2xl overflow-hidden w-full max-w-md shadow-2xl z-10">
+                                <div class="bg-[#1a1a1a] px-5 py-4 flex items-center space-x-3 border-b border-white/5">
+                                    <div class="flex space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                    </div>
+                                    <div class="flex-1 ml-4 bg-black/40 rounded-lg py-1.5 px-4 text-xs text-gray-500 font-mono text-center flex items-center justify-center gap-2 border border-white/5"><i data-lucide="lock" class="w-3 h-3"></i>your-awesome-site.com</div>
+                                </div>
+                                <div class="p-8 space-y-8 bg-gradient-to-b from-[#121212] to-[#0d0d0d] min-h-[340px]">
+                                    <div class="flex justify-between items-center">
+                                        <div class="h-4 w-24 bg-white/10 rounded animate-pulse"></div>
+                                        <div class="flex space-x-3">
+                                            <div class="h-3 w-12 bg-white/10 rounded"></div>
+                                            <div class="h-3 w-12 bg-white/10 rounded"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center space-y-5 py-10">
+                                        <div class="h-8 w-3/4 bg-white/10 rounded animate-pulse"></div>
+                                        <div class="h-4 w-1/2 bg-white/5 rounded"></div>
+                                        <div class="mt-8 h-10 w-32 bg-blue-500/20 border border-blue-500/30 rounded-lg shadow-[0_0_20px_rgba(59,130,246,0.15)]"></div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="h-24 bg-white/5 rounded-xl border border-white/5"></div>
+                                        <div class="h-24 bg-white/5 rounded-xl border border-white/5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="py-24 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 scroll-animate">
+                        <h2 class="text-3xl sm:text-5xl font-bold mb-4 tracking-tight">Featured <span class="text-gradient">Contributions</span></h2>
+                        <p class="text-gray-300 max-w-2xl mx-auto text-lg">A selection of my contributions, and tools.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="group relative rounded-2xl bg-[#0d0d0d] border border-white/10 p-1 overflow-hidden scroll-animate hover:border-blue-500/30 transition-all duration-300">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-20"></div>
+                            <div class="relative h-full bg-[#121212] rounded-xl p-8 flex flex-col z-10">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 border border-blue-500/10">
+                                        <i data-lucide="terminal" class="w-6 h-6"></i>
+                                    </div>
+                                    <a href="https://github.com/zoicware/ZOICWARE" target="_blank" class="text-gray-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg">
+                                        <i data-lucide="github" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Zoicware</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">A PowerShell app to tweak and customize Windows 10 & Windows 11 focusing on performance and quality of life.</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <span class="text-xs font-mono text-blue-300 bg-blue-500/10 px-2 py-1 rounded border border-blue-500/10">PowerShell</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">Windows</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">Scripting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-2xl bg-[#0d0d0d] border border-white/10 p-1 overflow-hidden scroll-animate hover:border-purple-500/30 transition-all duration-300" style="animation-delay: 0.1s;">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-20"></div>
+                            <div class="relative h-full bg-[#121212] rounded-xl p-8 flex flex-col z-10">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 border border-purple-500/10">
+                                        <i data-lucide="clapperboard" class="w-6 h-6"></i>
+                                    </div>
+                                    <a href="https://github.com/MoaningFish52/Santis-Website" target="_blank" class="text-gray-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg">
+                                        <i data-lucide="github" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">Santi Edits</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">My friends website I made for him.</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <span class="text-xs font-mono text-purple-300 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/10">HTML</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">CSS</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">JS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-2xl bg-[#0d0d0d] border border-white/10 p-1 overflow-hidden scroll-animate hover:border-red-500/30 transition-all duration-300" style="animation-delay: 0.2s;">
+                            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-20"></div>
+                            <div class="relative h-full bg-[#121212] rounded-xl p-8 flex flex-col z-10">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="p-3 bg-red-500/10 rounded-xl text-red-400 border border-red-500/10">
+                                        <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+                                    </div>
+                                    <a href="https://github.com/MoaningFish52/Calamari-Website" target="_blank" class="text-gray-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg">
+                                        <i data-lucide="github" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Calamari</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">A website I made for a cheat provider.</p>
+                                <div class="flex items-center gap-3 mt-auto">
+                                    <span class="text-xs font-mono text-red-300 bg-red-500/10 px-2 py-1 rounded border border-red-500/10">HTML</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">CSS</span>
+                                    <span class="text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">JS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="py-24 relative bg-white/5 border-y border-white/5 mb-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="relative bg-gradient-to-br from-[#171717] to-[#121212] border border-white/10 p-10 md:p-16 rounded-3xl overflow-hidden scroll-animate shadow-2xl">
+                        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[80px]" aria-hidden="true"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+                            <div class="md:w-3/5 text-center md:text-left">
+                                <h2 class="text-3xl sm:text-4xl font-bold mb-4"><span class="text-gradient">Connect</span> with Me</h2>
+                                <p class="text-lg text-gray-400 max-lg">I am always open to chat. Connect with me on either platform.</p>
+                            </div>
+                            <div class="md:w-2/5 flex flex-col sm:flex-row gap-4 w-full">
+                                <a href="https://t.me/mattfj7" target="_blank" class="flex-1 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-6 rounded-xl text-center transition duration-300 border border-white/10 flex items-center justify-center backdrop-blur-sm group">
+                                    <i class="fa-brands fa-telegram w-5 h-5 mr-2 group-hover:text-white transition-colors"></i> Telegram
+                                </a>
+                                <a href="https://discord.com/users/1283955490740764694" target="_blank" class="btn-glow flex-1 bg-blue-600 hover:bg-[#4752C4] text-white font-bold py-4 px-6 rounded-xl text-center transition duration-300 shadow-lg shadow-blue-600/20 flex items-center justify-center group">
+                                    <i class="fa-brands fa-discord w-5 h-5 mr-2"></i> Discord
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="project-form-page" class="py-24 hidden relative min-h-screen">
+            <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] -z-10" aria-hidden="true"></div>
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 scroll-animate">
+                    <button onclick="toggleProjectPage(false)" class="mb-8 inline-flex items-center text-sm text-gray-500 hover:text-white transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Home
+                    </button>
+                    <h1 class="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">Start Your <span class="text-gradient">Project</span></h1>
+                    <p class="text-lg text-gray-400">Fill out the form below and I'll get back to you within 24 hours.</p>
+                </div>
+                
+                <div class="bg-[#171717] border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl backdrop-blur-xl scroll-animate">
+                    <div id="success-message" class="hidden text-center py-12 space-y-6">
+                        <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto">
+                            <i data-lucide="check" class="w-10 h-10 text-green-500"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-white">Message Sent!</h2>
+                        <p class="text-gray-400">Thanks for reaching out. I'll be in touch shortly.</p>
+                        <a href="#home" id="form-home-link-success" class="inline-flex items-center justify-center px-8 py-3 text-base font-bold text-white transition duration-300 bg-blue-600 rounded-xl hover:bg-blue-700 mt-4">Return Home</a>
+                    </div>
+                    
+                    <form action="https://formspree.io/f/mrbnlnke" method="POST" class="space-y-6" novalidate id="contact-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 ml-1">Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3.5 bg-black/30 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#171717] focus:border-blue-500 transition-all duration-200" placeholder="Jane Doe" required>
+                                <p id="name-error" class="text-red-400 text-xs h-4"></p>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 ml-1">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3.5 bg-black/30 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#171717] focus:border-blue-500 transition-all duration-200" placeholder="jane@example.com" required>
+                                <p id="email-error" class="text-red-400 text-xs h-4"></p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="project-type" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 ml-1">Project Type</label>
+                            <input type="text" id="project-type" name="project-type" class="w-full px-4 py-3.5 bg-black/30 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#171717] focus:border-blue-500 transition-all duration-200" placeholder="e.g. Portfolio, Landing Page, E-commerce" required>
+                            <p id="project-type-error" class="text-red-400 text-xs h-4"></p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-gray-400 ml-1">Details</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3.5 bg-black/30 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#171717] focus:border-blue-500 transition-all duration-200 resize-none" placeholder="Tell me about your requirements..." required></textarea>
+                            <p id="message-error" class="text-red-400 text-xs h-4"></p>
+                        </div>
+                        <button type="submit" class="w-full btn-glow inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-blue-600 rounded-xl shadow-lg shadow-blue-900/20 mt-2">
+                            Send Request
+                            <i data-lucide="send" class="ml-2 w-5 h-5"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="copy-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md border border-white/10 text-white px-6 py-3 rounded-full shadow-2xl transform translate-y-24 opacity-0 transition-all duration-500 z-[1000] flex items-center space-x-3 pointer-events-none">
+        <div class="bg-green-500/20 p-1.5 rounded-full">
+            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+        </div>
+        <span class="font-medium text-sm text-gray-200">Email copied to clipboard: moaningtortoise@gmail.com</span>
+    </div>
+    
+    <div id="scroll-to-top" aria-label="Scroll to top">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </div>
+
+    <footer class="bg-[#050505] border-t border-white/5 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold tracking-tight">Matthew</span>
+                    <p class="text-sm text-gray-500 mt-1">&copy; 2025 All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#skills" class="nav-link-footer text-sm text-gray-500">Skills</a>
+                    <a href="#services" class="nav-link-footer text-sm text-gray-500">Services</a>
+                    <a href="#projects" class="nav-link-footer text-sm text-gray-500">Projects</a>
+                    <a href="#contact" class="nav-link-footer text-sm text-gray-500">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

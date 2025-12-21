@@ -1,0 +1,269 @@
+:root {
+    --background: #0a0a0a;
+    --card-bg: #171717;
+    --primary: #3b82f6;
+}
+html {
+    scrollbar-gutter: stable;
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: #f3f4f6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+.perspective-container {
+    perspective: 1200px;
+}
+
+.text-gradient { 
+    background: linear-gradient(to right, #60a5fa, #818cf8, #c084fc, #818cf8, #60a5fa); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text; 
+    background-size: 200% auto;
+    animation: gradientFlow 3s linear infinite;
+    display: inline-block;
+}
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    background-image: radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%), radial-gradient(#262626 1px, transparent 0);
+    background-size: 100% 100%, 100% 100%, 40px 40px;
+    z-index: -1;
+    background-attachment: fixed; 
+}
+@media (max-width: 767px) {
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+}
+.glass-header {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s ease;
+}
+
+.nav-link, .nav-link-footer, .mobile-nav-link {
+    position: relative;
+    color: #9ca3af;
+    padding: 6px 14px;
+    transition: color 0.2s ease-in-out;
+    text-decoration: none;
+    font-weight: 500;
+}
+.nav-link:hover, .nav-link-footer:hover, .mobile-nav-link:hover {
+    color: #ffffff;
+}
+.nav-link.active {
+    color: white;
+}
+.nav-link.active::before {
+    transform: scale(1);
+    opacity: 1;
+}
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: -1;
+}
+.nav-link:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.animated-border-card {
+    position: relative; 
+    background: rgba(255, 255, 255, 0.03); 
+    border-radius: 1rem; 
+    padding: 1px; 
+    overflow: hidden; 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+.animated-border-card:hover {
+    transform: translateY(-4px);
+}
+.card-content { 
+    position: relative;
+    z-index: 10;
+    background: #171717; 
+    border-radius: 1rem;
+    padding: 2rem;
+    height: 100%; 
+}
+.tilt-card {
+    transform: rotateY(-12deg) rotateX(5deg);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+    will-change: transform;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.tilt-card:hover, .tilt-card.active-touch {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.btn-glow {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.btn-glow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+.btn-glow:hover::after {
+    left: 100%;
+}
+.btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.5);
+}
+#scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    background-color: var(--primary);
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+}
+#scroll-to-top:hover {
+    transform: translateY(0) scale(1.1);
+    background-color: #2563eb;
+}
+#scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes fadeInSlide {
+    from { opacity: 0; transform: translateY(30px); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: opacity, transform;
+}
+.scroll-animate.is-visible {
+    animation: fadeInSlide 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 3px solid #FFF;
+    border-bottom-color: var(--primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+}
+.marquee-content { 
+    display: inline-flex; 
+    width: max-content;
+    cursor: grab;
+    will-change: transform;
+}
+.marquee-content:active {
+    cursor: grabbing;
+}
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 2rem;
+    color: #9ca3af;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.marquee-item i, .marquee-item svg {
+    pointer-events: none;
+}
+.marquee-item:hover {
+    color: white;
+}
