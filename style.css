@@ -55,6 +55,7 @@ body {
     background-size: 200% auto;
     animation: gradientFlow 3s linear infinite;
     display: inline-block;
+    padding-bottom: 0.2em;
 }
 .parallax-bg {
     position: fixed;
