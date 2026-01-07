@@ -14,7 +14,31 @@ const DOM = {
     copyToast: document.getElementById('copy-toast'),
     headerSocials: document.getElementById('header-socials'),
     navLinks: document.querySelectorAll('.nav-link'),
-    sections: document.querySelectorAll('section')
+    sections: document.querySelectorAll('section'),
+    settingsToggle: document.getElementById('settings-toggle'),
+    settingsPanel: document.getElementById('settings-panel'),
+    settingsOverlay: document.getElementById('settings-overlay'),
+    closeSettings: document.getElementById('close-settings'),
+    settingsContent: document.getElementById('settings-content'),
+    resetSettings: document.getElementById('reset-settings'),
+    themeBtns: document.querySelectorAll('.theme-btn'),
+    effectBtns: document.querySelectorAll('.effect-btn'),
+    effectsContainer: document.getElementById('effects-container')
+};
+
+const THEMES = {
+    blue: { 
+        400: '96 165 250', 500: '59 130 246', 600: '37 99 235',
+        grad: ['#60a5fa', '#818cf8', '#c084fc'] 
+    },
+    purple: { 
+        400: '192 132 252', 500: '168 85 247', 600: '147 51 234',
+        grad: ['#c084fc', '#e879f9', '#f472b6'] 
+    },
+    emerald: { 
+        400: '52 211 153', 500: '16 185 129', 600: '5 150 105',
+        grad: ['#34d399', '#6ee7b7', '#a7f3d0'] 
+    }
 };
 
 const handleScrollToSection = (targetHref) => {
@@ -30,16 +54,20 @@ const handleScrollToSection = (targetHref) => {
 const initScrollSpy = () => {
     window.addEventListener('scroll', () => {
         let current = '';
-        DOM.sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                current = section.getAttribute('id');
-            }
-        });
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+            current = 'contact';
+        } else {
+            DOM.sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+        }
         DOM.navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (current && link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
             }
         });
@@ -150,6 +178,143 @@ const initMarquee = () => {
     animate();
 };
 
+const setTheme = (colorName) => {
+    const themeData = THEMES[colorName];
+    if (!themeData) return;
+    
+    document.documentElement.style.setProperty('--brand-400', themeData[400]);
+    document.documentElement.style.setProperty('--brand-500', themeData[500]);
+    document.documentElement.style.setProperty('--brand-600', themeData[600]);
+    
+    document.documentElement.style.setProperty('--gradient-1', themeData.grad[0]);
+    document.documentElement.style.setProperty('--gradient-2', themeData.grad[1]);
+    document.documentElement.style.setProperty('--gradient-3', themeData.grad[2]);
+
+    DOM.themeBtns.forEach(btn => {
+        if(btn.dataset.color === colorName) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    localStorage.setItem('site_theme', colorName);
+};
+
+const setEffect = (effectName) => {
+    DOM.effectsContainer.innerHTML = ''; 
+    
+    if (effectName === 'spores') initSpores();
+    else if (effectName === 'snow') initSnow();
+    else if (effectName === 'rain') initRain();
+
+    DOM.effectBtns.forEach(btn => {
+        if(btn.dataset.effect === effectName) btn.classList.add('active');
+        else btn.classList.remove('active');
+    });
+
+    localStorage.setItem('site_effect', effectName);
+};
+
+const initSpores = () => {
+    const count = 50;
+    for (let i = 0; i < count; i++) {
+        const spore = document.createElement('div');
+        spore.classList.add('spore');
+        const size = Math.random() * 4 + 2;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 20;
+        const drift = (Math.random() - 0.5) * 100 + 'px';
+        
+        spore.style.width = `${size}px`;
+        spore.style.height = `${size}px`;
+        spore.style.left = `${left}%`;
+        spore.style.animation = `float-spore ${duration}s linear infinite`;
+        spore.style.animationDelay = `-${delay}s`;
+        spore.style.setProperty('--drift', drift);
+        DOM.effectsContainer.appendChild(spore);
+    }
+};
+
+const initSnow = () => {
+    const count = 40;
+    for (let i = 0; i < count; i++) {
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flake.innerHTML = '<i class="fa-regular fa-snowflake"></i>';
+        
+        const size = Math.random() * 10 + 10; 
+        const left = Math.random() * 100;
+        const duration = Math.random() * 5 + 5; 
+        const delay = Math.random() * 5;
+        const sway = (Math.random() - 0.5) * 50 + 'px';
+        
+        flake.style.fontSize = `${size}px`;
+        flake.style.left = `${left}%`;
+        flake.style.animation = `fall ${duration}s linear infinite`;
+        flake.style.animationDelay = `-${delay}s`;
+        flake.style.setProperty('--sway', sway);
+        DOM.effectsContainer.appendChild(flake);
+    }
+};
+
+const initRain = () => {
+    const count = 80;
+    for (let i = 0; i < count; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('raindrop');
+        const height = Math.random() * 20 + 10;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 1 + 0.5;
+        const delay = Math.random() * 2;
+        
+        drop.style.height = `${height}px`;
+        drop.style.left = `${left}%`;
+        drop.style.animation = `rain-fall ${duration}s linear infinite`;
+        drop.style.animationDelay = `-${delay}s`;
+        DOM.effectsContainer.appendChild(drop);
+    }
+};
+
+const initCustomization = () => {
+    const togglePanel = (show) => {
+        if(show) {
+            DOM.settingsPanel.classList.remove('hidden');
+            void DOM.settingsPanel.offsetWidth;
+            DOM.settingsPanel.classList.remove('opacity-0');
+            DOM.settingsContent.classList.remove('scale-95');
+        } else {
+            DOM.settingsPanel.classList.add('opacity-0');
+            DOM.settingsContent.classList.add('scale-95');
+            setTimeout(() => DOM.settingsPanel.classList.add('hidden'), 300);
+        }
+    };
+
+    DOM.settingsToggle.addEventListener('click', () => togglePanel(true));
+    DOM.closeSettings.addEventListener('click', () => togglePanel(false));
+    DOM.settingsOverlay.addEventListener('click', () => togglePanel(false));
+
+    DOM.themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.dataset.color));
+    });
+
+    DOM.effectBtns.forEach(btn => {
+        btn.addEventListener('click', () => setEffect(btn.dataset.effect));
+    });
+
+    DOM.resetSettings.addEventListener('click', () => {
+        setTheme('blue');
+        setEffect('grid');
+    });
+
+    const savedTheme = localStorage.getItem('site_theme');
+    const savedEffect = localStorage.getItem('site_effect');
+    
+    if(savedTheme && THEMES[savedTheme]) setTheme(savedTheme);
+    else setTheme('blue');
+
+    if(savedEffect) setEffect(savedEffect);
+    else setEffect('grid');
+};
+
 const validateField = (field, errorMessageId, rules = {}) => {
     const errorElement = document.getElementById(errorMessageId);
     const value = field.value.trim();
@@ -258,6 +423,7 @@ const initialize = () => {
                 initAnimations();
                 initMarquee();
                 initScrollSpy();
+                initCustomization();
             }, 500);
         });
     });
@@ -270,7 +436,8 @@ const initialize = () => {
     skillCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            card.style.background = `radial-gradient(400px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(59, 130, 246, 0.4), transparent 60%), rgba(255, 255, 255, 0.03)`;
+            const color = getComputedStyle(document.documentElement).getPropertyValue('--brand-500').trim();
+            card.style.background = `radial-gradient(400px circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgb(${color} / 0.4), transparent 60%), rgba(255, 255, 255, 0.03)`;
         });
         card.addEventListener('mouseleave', () => {
             card.style.background = 'rgba(255, 255, 255, 0.03)';
